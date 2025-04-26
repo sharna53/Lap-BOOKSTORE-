@@ -1,0 +1,229 @@
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Bookstore</title>
+
+  <style>
+
+    body {
+
+      font-family: Arial, sans-serif;
+
+      background-color: #fff;
+
+      color: #1f2937; 
+
+      margin: 0;
+
+      padding: 0;
+
+    }
+
+    nav {
+
+      background-color: #111827; 
+
+      color: white;
+
+      padding: 12px 16px;
+
+      font-size: 1.6rem;
+
+    }
+
+    main {
+
+      max-width: 1040px;
+
+      margin: 24px auto;
+
+      padding: 0 16px;
+
+    }
+
+    h2 {
+
+      font-weight: 600;
+
+      font-size: 25px;
+
+      margin-bottom: 16px;
+
+    }
+
+    label {
+
+      display: block;
+
+      font-size: 16px;
+
+      margin-bottom: 8px;
+
+    }
+
+    input[type="text"] {
+
+      width: 100%;
+
+      border: 2px solid #e5e7eb; 
+
+      border-radius: 2px;
+
+      font-size: 18px;
+
+      padding: 6px 8px;
+
+      box-sizing: border-box;
+
+    }
+
+    input[type="text"]:focus {
+
+      outline: none;
+
+      border-color: #3b82f6; 
+
+      box-shadow: 0 0 0 1px #3b82f6;
+
+    }
+
+    .form-group {
+
+      margin-bottom: 16px;
+
+    }
+
+    .buttons {
+
+      margin-top: 8px;
+
+    }
+
+    button {
+
+      font-size: 16px;
+
+      padding: 6px 12px;
+
+      border: none;
+
+      border-radius: 2px;
+
+      cursor: pointer;
+
+      color: white;
+
+      margin-right: 8px;
+
+    }
+
+    button.submit {
+
+      background-color: #2563eb; 
+
+    }
+
+    button.submit:hover {
+
+      background-color: #1e40af; 
+
+    }
+
+    button.back {
+
+      background-color: #dc2626; 
+
+    }
+
+    button.back:hover {
+
+      background-color: #991b1b; 
+
+    }
+
+    @media (max-width: 480px) {
+
+      main {
+
+        margin: 16px 12px;
+
+        padding: 0 8px;
+
+      }
+
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+  <nav>Bookstore</nav>
+
+  <main>
+
+    <h2>New Book</h2>
+
+    <form>
+
+      <div class="form-group">
+
+        <label for="title">Title</label>
+
+        <input id="title" name="title" type="text" />
+
+      </div>
+
+      <div class="form-group">
+
+        <label for="author">Author</label>
+
+        <input id="author" name="author" type="text" />
+
+      </div>
+
+      <div class="form-group">
+
+        <label for="isbn">ISBN</label>
+
+        <input id="isbn" name="isbn" type="text" />
+
+      </div>
+
+      <div class="form-group">
+
+        <label for="stock">Stock</label>
+
+        <input id="stock" name="stock" type="text" />
+
+      </div>
+
+      <div class="form-group">
+
+        <label for="price">Price</label>
+
+        <input id="price" name="price" type="text" />
+
+      </div>
+
+      <div class="buttons">
+
+        <button type="submit" class="submit">Submit</button>
+
+        <button type="button" class="back">Back</button>
+
+      </div>
+
+    </form>
+
+  </main>
+
+</body>
+
+</html>

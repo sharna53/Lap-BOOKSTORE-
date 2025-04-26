@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Bookstore</title>
+
+  <style>
+
+
+
+    body {
+
+      margin: 0;
+
+      font-family: Arial, sans-serif;
+
+      background-color: #f9fafb;
+
+      color: #111827;
+
+    }
+
+
+
+    nav {
+
+      background-color: #111827;
+
+      padding: 1rem;
+
+      text-align: left;
+
+    }
+
+
+
+    nav h1 {
+
+      margin: 0;
+
+      font-size: 1.5rem;
+
+      font-weight: 600;
+
+      color: white;
+
+    }
+
+
+
+    main {
+
+      max-width: 1050px;
+
+      margin: 2rem auto;
+
+      padding: 0 1rem;
+
+    }
+
+
+
+    form {
+
+      display: flex;
+
+      flex-wrap: wrap;
+
+      gap: 0.5rem;
+
+      margin-bottom: 1rem;
+
+    }
+
+
+
+    input[type="text"] {
+
+      flex: 1;
+
+      min-width: 200px;
+
+      padding: 0.5rem;
+
+      font-size: 1rem;
+
+      border: 1px solid #d1d5db;
+
+      border-radius: 6px;
+
+    }
+
+
+
+    button {
+
+      padding: 0.5rem 1rem;
+
+      font-size: 0.9rem;
+
+      font-family: Arial, sans-serif;
+
+       border: none;
+
+      border-radius: 6px;
+
+      cursor: pointer;
+
+      transition: background-color 0.2s;
+
+    }
+
+    input::placeholder {
+
+  font-family: Arial, sans-serif; 
+
+  font-size: 1rem;
+
+  color: #6b7280; 
+
+}
+
+    .search {
+
+      background-color: #2563eb;
+
+      color: white;
+
+    }
+
+
+
+    .search:hover {
+
+      background-color: #1d4ed8;
+
+    }
+
+
+
+    .new-book {
+
+      background-color: #16a34a;
+
+      color: white;
+
+    }
+
+
+
+    .new-book:hover {
+
+      background-color: #15803d;
+
+    }
+
+
+
+    table {
+
+      width: 100%;
+
+      border-collapse: collapse;
+
+      background-color: white;
+
+      border-radius: 8px;
+
+      overflow: hidden;
+
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+
+    }
+
+
+
+    th, td {
+
+      padding: 0.75rem;
+
+      text-align: left;
+
+      border-bottom: 1px solid #e5e7eb;
+
+    }
+
+
+
+    thead {
+
+      background-color: #fbfbfb00;
+
+    }
+
+    .actions button {
+
+      background: none;
+
+      border: 1px solid;
+
+      padding: 0.3rem 0.6rem;
+
+      margin-right: 0.3rem;
+
+      border-radius: 4px;
+
+      font-size: 0.8rem;
+
+      font-family:Arial, sans-serif;
+
+    }
+
+  
+
+    .details {
+
+      color: #2563eb;
+
+      border-color: #2563eb;
+
+    }
+
+
+
+    .details:hover {
+
+      background-color: #eff6ff;
+
+    }
+
+
+
+    .update {
+
+      color: #d97706;
+
+      border-color: #d97706;
+
+    }
+
+
+
+    .update:hover {
+
+      background-color: #fef3c7;
+
+    }
+
+
+
+    .delete {
+
+      color: #dc2626;
+
+      border-color: #dc2626;
+
+    }
+
+
+
+    .delete:hover {
+
+      background-color: #fee2e2;
+
+    }
+
+
+
+    @media (max-width: 640px) {
+
+      form {
+
+        flex-direction: column;
+
+      }
+
+      button.search,
+
+      button.new-book {
+
+        width: 100%;
+
+      }
+
+    }
+
+    .pagination-container {
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  margin-top: 10px;
+
+  flex-wrap: wrap;
+
+}
+
+
+
+.pagination-text {
+
+  color: #111827;
+
+  font-size: 0.9rem;
+
+}
+
+
+
+.pagination {
+
+  display: flex;
+
+  flex-wrap: wrap;
+
+}
+
+
+
+.pagination span,
+
+.pagination a {
+
+  display: inline-table;
+
+  padding: 5px 10px;
+
+  margin: 1px;
+
+  border: 1px solid #f7b8b8;
+
+  border-radius: 4px;
+
+  text-decoration: none;
+
+  text-align: center;
+
+  color: #f63030;
+
+}
+
+
+
+.pagination .active {
+
+  background-color: #2563eb;
+
+  color: white;
+
+  border-color: #2563eb;
+
+}
+
+
+
+  </style>
+
+</head>
+
+<body>
+
+  <nav>
+
+    <h1>Bookstore</h1>
+
+  </nav>
+
+  <main>
+
+    <form>
+
+      <input type="text" placeholder="Search books">
+
+      <button type="submit" class="search">Search</button>
+
+      <button type="button" class="new-book" onclick="location.href='new-book.html'">New Book</button>
+
+
+
+    </form>
+
+    <table>
+
+      <thead>
+
+        <tr>
+
+          <th>ID</th>
+
+          <th>Title</th>
+
+          <th>Author</th>
+
+            </tr>
+
+      </thead>
+
+      <tbody>
+
+        <tr>
+
+          <td>1</td>
+
+          <td>Bangladesh.</td>
+
+          <td>Ansel Schmidt II</td>
+
+          <td class="actions">
+
+            <button class="details">Details</button>
+
+            <button class="update">Update</button>
+
+            <button class="delete">Delete</button>
+
+          </td>
+
+        </tr>
+
+        <tr>
+
+          <td>2</td>
+
+          <td>Ullam beatae sed distinctio repellat voluptatum ut.</td>
+
+          <td>Jaylen Hayes</td>
+
+          <td class="actions">
+
+            <button class="details">Details</button>
+
+            <button class="update">Update</button>
+
+            <button class="delete">Delete</button>
+
+          </td>
+
+        </tr>
+
+        <tr>
+
+          <td>3</td>
+
+          <td>Ex aut voluptatem dolorem.</td>
+
+          <td>Russel Wisoky</td>
+
+          <td class="actions">
+
+            <button class="details">Details</button>
+
+            <button class="update">Update</button>
+
+            <button class="delete">Delete</button>
+
+          </td>
+
+        </tr>
+
+        <tr>
+
+          <td>4</td>
+
+          <td>A looser life .</td>
+
+          <td> Murad Hasan </td>
+
+          <td class="actions">
+
+            <button class="details">Details</button>
+
+            <button class="update">Update</button>
+
+            <button class="delete">Delete</button>
+
+          </td>
+
+         </tr>
+
+         <tr>
+
+          <td>5</td>
+
+          <td>The Silent Forest</td>
+
+          <td> Aria Bloom </td>
+
+          <td class="actions">
+
+            <button class="details">Details</button>
+
+            <button class="update">Update</button>
+
+            <button class="delete">Delete</button>
+
+          </td>
+
+         </tr>
+
+         <tr>
+
+          <td>6</td>
+
+          <td>Beyond the Horizon</td>
+
+          <td> Liam Carter </td>
+
+          <td class="actions">
+
+            <button class="details">Details</button>
+
+            <button class="update">Update</button>
+
+            <button class="delete">Delete</button>
+
+          </td>
+
+         </tr>
+
+         <tr>
+
+          <td>7</td>
+
+          <td>Whispers of the Moon</td>
+
+          <td>Nora Quinn </td>
+
+          <td class="actions">
+
+            <button class="details">Details</button>
+
+            <button class="update">Update</button>
+
+            <button class="delete">Delete</button>
+
+          </td>
+
+         </tr>
+
+         <tr>
+
+          <td>8</td>
+
+          <td>Broken Wings</td>
+
+          <td>Ezra Coleman </td>
+
+          <td class="actions">
+
+            <button class="details">Details</button>
+
+            <button class="update">Update</button>
+
+            <button class="delete">Delete</button>
+
+          </td>
+
+         </tr>
+
+         <tr>
+
+          <td>9</td>
+
+          <td>Dawn Over Shadows</td>
+
+          <td> Mila Reyes </td>
+
+          <td class="actions">
+
+            <button class="details">Details</button>
+
+            <button class="update">Update</button>
+
+            <button class="delete">Delete</button>
+
+          </td>
+
+         </tr>
+
+         <tr>
+
+          <td>10</td>
+
+          <td>The Lost Algorithm</td>
+
+          <td> Chloe Harper </td>
+
+          <td class="actions">
+
+            <button class="details">Details</button>
+
+            <button class="update">Update</button>
+
+            <button class="delete">Delete</button>
+
+          </td>
+
+         </tr>
+
+         <tr>
+
+          <td>11</td>
+
+          <td>The Last Time We Watched the Stars Together</td>
+
+          <td> Clara Nightingale </td>
+
+          <td class="actions">
+
+            <button class="details">Details</button>
+
+            <button class="update">Update</button>
+
+            <button class="delete">Delete</button>
+
+          </td>
+
+         </tr>
+
+         <tr>
+
+          <td>12</td>
+
+          <td>When the Mountains Remembered Our Names</td>
+
+          <td> Elias Thorn </td>
+
+          <td class="actions">
+
+            <button class="details">Details</button>
+
+            <button class="update">Update</button>
+
+            <button class="delete">Delete</button>
+
+          </td>
+
+         </tr>
+
+         <tr>
+
+          <td>13</td>
+
+          <td>A Symphony of Silence and Shattered Glass </td>
+
+          <td> Lyra Vance </td>
+
+          <td class="actions">
+
+            <button class="details">Details</button>
+
+            <button class="update">Update</button>
+
+            <button class="delete">Delete</button>
+
+          </td>
+
+         </tr>
+
+         <tr>
+
+          <td>14</td>
+
+          <td>Before the Earth Forgot to Turn</td>
+
+          <td>Rowan Hart </td>
+
+          <td class="actions">
+
+            <button class="details">Details</button>
+
+            <button class="update">Update</button>
+
+            <button class="delete">Delete</button>
+
+          </td>
+
+         </tr>
+
+         <tr>
+
+          <td>15</td>
+
+          <td>The Library of Forgotten Tomorrows</td>
+
+          <td>  Leo Thorne </td>
+
+          <td class="actions">
+
+            <button class="details">Details</button>
+
+            <button class="update">Update</button>
+
+            <button class="delete">Delete</button>
+
+          </td>
+
+         </tr>
+
+         <tr>
+
+          <td>16</td>
+
+          <td>The 5th Season of Silence </td>
+
+          <td> Nova James </td>
+
+          <td class="actions">
+
+            <button class="details">Details</button>
+
+            <button class="update">Update</button>
+
+            <button class="delete">Delete</button>
+
+          </td>
+
+         </tr>
+
+         <tr>
+
+          <td>17</td>
+
+          <td>Notes from the Void </td>
+
+          <td> Kai Morgan </td>
+
+          <td class="actions">
+
+            <button class="details">Details</button>
+
+            <button class="update">Update</button>
+
+            <button class="delete">Delete</button>
+
+          </td>
+
+         </tr>
+
+         <tr>
+
+          <td>18</td>
+
+          <td>The Sound of Paper</td>
+
+          <td>Oliver Grant </td>
+
+          <td class="actions">
+
+            <button class="details">Details</button>
+
+            <button class="update">Update</button>
+
+            <button class="delete">Delete</button>
+
+          </td>
+
+         </tr>
+
+         <tr>
+
+          <td>19</td>
+
+          <td>The Library of Forgotten Tomorrow</td>
+
+          <td>Leo Thorne </td>
+
+          <td class="actions">
+
+            <button class="details">Details</button>
+
+            <button class="update">Update</button>
+
+            <button class="delete">Delete</button>
+
+          </td>
+
+         </tr>
+
+         <tr>
+
+          <td>20</td>
+
+          <td>An Echo of You in Every Quiet Room I Enter </td>
+
+          <td> Aurora Blaise </td>
+
+          <td class="actions">
+
+            <button class="details">Details</button>
+
+            <button class="update">Update</button>
+
+            <button class="delete">Delete</button>
+
+          </td>
+
+         </tr>
+
+         <tr>
+
+          <td>21</td>
+
+          <td>Before the Earth Forgot to Turn</td>
+
+          <td> Rowan Hart</td>
+
+          <td class="actions">
+
+            <button class="details">Details</button>
+
+            <button class="update">Update</button>
+
+            <button class="delete">Delete</button>
+
+          </td>
+
+         </tr>
+
+         <tr>
+
+          <td>22</td>
+
+          <td>In the House Between Dusk and Dream </td>
+
+          <td> Hazel Wren</td>
+
+          <td class="actions">
+
+            <button class="details">Details</button>
+
+            <button class="update">Update</button>
+
+            <button class="delete">Delete</button>
+
+          </td>
+
+         </tr>
+
+         <tr>
+
+          <td>23</td>
+
+          <td>The Stranger Who Knew My Heart by Name </td>
+
+          <td>Silas Reed </td>
+
+          <td class="actions">
+
+            <button class="details">Details</button>
+
+            <button class="update">Update</button>
+
+            <button class="delete">Delete</button>
+
+          </td>
+
+         </tr>
+
+         <tr>
+
+          <td>24</td>
+
+          <td>An Echo of You in Every Quiet Room I Enter</td>
+
+          <td> Aurora Blaise </td>
+
+          <td class="actions">
+
+            <button class="details">Details</button>
+
+            <button class="update">Update</button>
+
+            <button class="delete">Delete</button>
+
+          </td>
+
+         </tr>
+
+         <tr>
+
+          <td>25</td>
+
+          <td>If I Could Rewrite the Sky, I’d Start with You </td>
+
+          <td> Luca Gre </td>
+
+          <td class="actions">
+
+            <button class="details">Details</button>
+
+            <button class="update">Update</button>
+
+            <button class="delete">Delete</button>
+
+          </td>
+
+         </tr>
+
+
+
+        
+
+                         <!-- Add more rows as needed -->
+
+
+
+        
+
+      </tbody>
+
+    </table>
+
+    <div class="pagination-container">
+
+      <div class="pagination-text">Showing 1 to 25 of 100 results</div>
+
+      <div class="pagination">
+
+        <span class="active">1</span>
+
+        <a href="#">2</a>
+
+        <a href="#">3</a>
+
+        <a href="#">4</a>
+
+        <a href="#">5</a>
+
+        <a href="#">6</a>
+
+        <a href="#">7</a>
+
+        <a href="#">8</a>
+
+        <a href="#">9</a>
+
+        <a href="#">10</a>
+
+        <a href="#">..</a>
+
+        <a href="#">20</a>
+
+        <a href="#">21</a>
+
+        <a href="#">></a>
+
+      </div>
+
+    </div>
+
+      </main>
+
+</body>
+
+</html>
